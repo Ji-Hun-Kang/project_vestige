@@ -1,5 +1,8 @@
 package com.jikang.vestige.web;
 
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,5 +24,10 @@ public class TestControllerIntegreTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Test
+    public void save_테스트(){
+        Logger logger = LoggerFactory.getLogger(TestControllerIntegreTest.class);
 
+        logger.info("save_테스트 ============================");
+    }
 }
