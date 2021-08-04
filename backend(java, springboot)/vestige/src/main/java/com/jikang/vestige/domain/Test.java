@@ -16,11 +16,10 @@ public class Test {
 	private String author;
 	
 	public Test() {
-		super();
+
 	}
 
 	public Test(Long id, String title, String author) {
-		super();
 		this.id = id;
 		this.title = title;
 		this.author = author;

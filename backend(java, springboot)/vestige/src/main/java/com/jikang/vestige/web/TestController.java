@@ -19,7 +19,7 @@ import com.jikang.vestige.service.TestService;
 @RestController
 public class TestController {
 	
-	private final TestService testService;
+	private TestService testService;
 	
 	@Autowired
 	public TestController(TestService testService) {

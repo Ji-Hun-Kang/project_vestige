@@ -13,7 +13,7 @@ import com.jikang.vestige.domain.TestRepository;
 @Service // 기능을 정의할 수 있고, 트랜잭션을 관리할 수 있다.
 public class TestService {
 	
-	private final TestRepository testRepository;
+	private TestRepository testRepository;
 	
 	@Autowired
 	public TestService(TestRepository testRepository) {
