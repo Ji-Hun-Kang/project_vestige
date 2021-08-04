@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,7 +35,7 @@ public class TestControllerIntegreTest {
     @Autowired
     private MockMvc mockMvc;
 
-    /*@Test
+   /* @Test
     public void save_테스트(){
         Logger logger = LoggerFactory.getLogger(TestControllerIntegreTest.class);
         logger.info("save_테스트 ============================");
@@ -44,13 +45,19 @@ public class TestControllerIntegreTest {
     @Test
     public void save_테스트() throws Exception {
         Logger logger = LoggerFactory.getLogger(TestControllerUnitTest.class);
-       /*logger.info("save_테스트() 시작 ============================");
+
+        /*logger.info("save_테스트() 시작 ============================");
+        // 가짜 TestService를 사용하므로 실제로 저장하기 작업을 수행하지 않는다.
         com.jikang.vestige.domain.Test test = testService.저장하기(new com.jikang.vestige.domain.Test(null, "제목", "코스"));
         System.out.println("test:"+test);*/
+
         //given (테스트를 하기 위한 준비)
         com.jikang.vestige.domain.Test test = new com.jikang.vestige.domain.Test(null, "스프링 따라하기", "코스");
+        // ObjectMapper().writeValueAsString(object) : object를 json으로 변경하는 함수
+        // ObjectMapper().readValue(json) : json을 object로 변경하는 함수
         String content = new ObjectMapper().writeValueAsString(test);
-        //when(testService.저장하기(test)).thenReturn(new com.jikang.vestige.domain.Test(1L, "스프링 따라하기", "코스"));
+        //logger.info(content);
+        //when(testService.저장하기(test)).thenReturn(new com.jikang.vestige.domain.Test(1L, "스프링 따라하기", "jikang"));
 
         // when(테스트 실행)
         ResultActions resultAction = mockMvc.perform(post("/test")
@@ -63,6 +70,5 @@ public class TestControllerIntegreTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("스프링 따라하기"))
                 .andDo(MockMvcResultHandlers.print());
-
     }
 }

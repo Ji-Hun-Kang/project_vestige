@@ -29,20 +29,26 @@ public class TestControllerUnitTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean // IoC 환경에 등록됨.
+    @MockBean // IoC 환경에 bean 등록됨.(가짜 TestService)
     private TestService testService;
 
     //BDDMockito 패턴 given, when, then
-   @Test
+    @Test
     public void save_테스트() throws Exception {
-       Logger logger = LoggerFactory.getLogger(TestControllerUnitTest.class);
-       /*logger.info("save_테스트() 시작 ============================");
+        Logger logger = LoggerFactory.getLogger(TestControllerUnitTest.class);
+
+        /*logger.info("save_테스트() 시작 ============================");
+        // 가짜 TestService를 사용하므로 실제로 저장하기 작업을 수행하지 않는다.
         com.jikang.vestige.domain.Test test = testService.저장하기(new com.jikang.vestige.domain.Test(null, "제목", "코스"));
         System.out.println("test:"+test);*/
+
        //given (테스트를 하기 위한 준비)
        com.jikang.vestige.domain.Test test = new com.jikang.vestige.domain.Test(null, "스프링 따라하기", "코스");
+       // ObjectMapper().writeValueAsString(object) : object를 json으로 변경하는 함수
+       // ObjectMapper().readValue(json) : json을 object로 변경하는 함수
        String content = new ObjectMapper().writeValueAsString(test);
-       //when(testService.저장하기(test)).thenReturn(new com.jikang.vestige.domain.Test(1L, "스프링 따라하기", "코스"));
+       //logger.info(content);
+       when(testService.저장하기(test)).thenReturn(new com.jikang.vestige.domain.Test(1L, "스프링 따라하기", "jikang"));
 
        // when(테스트 실행)
        ResultActions resultAction = mockMvc.perform(post("/test")
@@ -55,6 +61,5 @@ public class TestControllerUnitTest {
                .andExpect(status().isCreated())
                .andExpect(jsonPath("$.title").value("스프링 따라하기"))
                .andDo(MockMvcResultHandlers.print());
-
     }
 }
