@@ -5,13 +5,7 @@ import com.jikang.vestige.service.PracticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 // 스프링이 com.jikang.vestige 패키지 이하를 스캔해서 모든 파일을 메모리에 new하는 것이 아님.
 // 특정 어노테이션이 붙어있는 클래스 파일들을 new해서 스프링 컨테이너에 관리한다.(IoC)
@@ -24,7 +18,12 @@ public class PracticeController {
 	public PracticeController(PracticeService practiceService) {
 		this.practiceService = practiceService;
 	}
-	
+
+	@GetMapping("/")
+	public ResponseEntity<?> checkRunOfServer(){
+		return new ResponseEntity<>("서버동작확인", HttpStatus.OK);
+	}
+
 	@PostMapping("/practice")
 	public ResponseEntity<?> save(@RequestBody Practice practice){
 		return new ResponseEntity<>(practiceService.저장하기(practice), HttpStatus.CREATED); // 201으로 응답

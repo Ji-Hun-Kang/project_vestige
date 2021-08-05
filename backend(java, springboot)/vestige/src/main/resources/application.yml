@@ -1,8 +1,10 @@
 server:
+  port: 8000
   servlet:
     encoding:
       charset: utf-8 #(요청을 모두 utf-8로 받아들인다.)
       enabled: true
+    context-path: /vestige
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,5 +15,12 @@ spring:
     hibernate:
       ddl-auto: create # create, update, none (서버 실행시마다 create면 테이블이 계속해서 새로 만들어진다. 한번 실행 후 update로 바꿔야한다.
       naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #(개발자가 적은 이름 그대로 컬럼명이 생성된다.)
+        #커멜표기법으로 적혀있는 변수명을 스네이크 표기법으로 변경한다
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        #개발자가 적은 이름 그대로 컬럼명이 생성된다.
+        #physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false # jpa가 사용하는 기본 넘버링 전략을 따를지에 대한 여부
     show-sql: true
+    properties:
+      hibernate.format_sql: true
+    open-in-view: true
