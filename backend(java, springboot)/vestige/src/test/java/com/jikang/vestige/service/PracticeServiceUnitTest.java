@@ -1,7 +1,7 @@
 package com.jikang.vestige.service;
 
 
-import com.jikang.vestige.domain.TestRepository;
+import com.jikang.vestige.domain.PracticeRepository;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -13,10 +13,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
  */
 
 @ExtendWith(MockitoExtension.class)
-public class TestServiceUnitTest {
+public class PracticeServiceUnitTest {
     @InjectMocks // TestService객체가 만들어질때 TestServiceUnitTest 파일에 @Mock로 등록된 모든 객체를 주입받는다.
-    private TestService testService;
+    private PracticeService practiceService;
 
     @Mock
-    private TestRepository testRepository;
+    private PracticeRepository bookRepository;
 }

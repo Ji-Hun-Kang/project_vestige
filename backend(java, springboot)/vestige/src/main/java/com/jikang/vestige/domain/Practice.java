@@ -6,20 +6,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity //서버 실행시에 테이블이 데이터베이스에 생성됨.(ORM)
-public class Test {
+public class Practice {
 
 	@Id // PK를 해당 변수로 하겠다는 뜻.
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 해당 데이터베이스 번호증가 전략을 따라가겠다.
 	private Long id;
-	
 	private String title;
 	private String author;
 	
-	public Test() {
+	public Practice() {
 
 	}
 
-	public Test(Long id, String title, String author) {
+	public Practice(Long id, String title, String author) {
 		this.id = id;
 		this.title = title;
 		this.author = author;
@@ -51,6 +50,6 @@ public class Test {
 
 	@Override
 	public String toString() {
-		return "Test [id=" + id + ", title=" + title + ", author=" + author + "]";
+		return "Practice [id=" + id + ", title=" + title + ", author=" + author + "]";
 	}	
 }
