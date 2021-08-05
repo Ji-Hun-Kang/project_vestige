@@ -32,5 +32,72 @@ public class User {
     @Column(nullable = true)
     private Timestamp withdrawalDate;
 
+    public User() {
+    }
 
+    public User(int number, String id, String password, String email, String role, Timestamp signupDate, Timestamp withdrawalDate) {
+        this.number = number;
+        this.id = id;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.signupDate = signupDate;
+        this.withdrawalDate = withdrawalDate;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Timestamp getSignupDate() {
+        return signupDate;
+    }
+
+    public void setSignupDate(Timestamp signupDate) {
+        this.signupDate = signupDate;
+    }
+
+    public Timestamp getWithdrawalDate() {
+        return withdrawalDate;
+    }
+
+    public void setWithdrawalDate(Timestamp withdrawalDate) {
+        this.withdrawalDate = withdrawalDate;
+    }
 }
