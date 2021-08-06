@@ -1,11 +1,13 @@
-package com.jikang.vestige.domain;
+package com.jikang.vestige.model;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+//@DynamicInsert // insert할 때 null인 필드를 제외한다.
 //ORM = Object -> 테이블로 맵핑하는 기술
 @Entity //서버 실행시에 테이블이 데이터베이스에 생성됨.(ORM)
 public class User {
@@ -23,8 +25,10 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @ColumnDefault("'user'")
-    private String role; // Enum을 쓰는게 좋다.(도메인을 지정할 수 있다.)
+    //@ColumnDefault("'user'")
+    //private String role; // Enum을 쓰는게 좋다.(도메인을 지정할 수 있다.)
+    @Enumerated(EnumType.STRING)//DB는 RoleType이 없으므로 @Enumerated로 string임을 알려준다.
+    private RoleType role;
 
     @CreationTimestamp // 시간이 자동으로 입력됨.
     private Timestamp signupDate;
@@ -35,7 +39,7 @@ public class User {
     public User() {
     }
 
-    public User(int number, String id, String password, String email, String role, Timestamp signupDate, Timestamp withdrawalDate) {
+    public User(int number, String id, String password, String email, RoleType role, Timestamp signupDate, Timestamp withdrawalDate) {
         this.number = number;
         this.id = id;
         this.password = password;
@@ -77,11 +81,11 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
+    public RoleType getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleType role) {
         this.role = role;
     }
 

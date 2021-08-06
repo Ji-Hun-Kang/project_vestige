@@ -1,7 +1,7 @@
 package com.jikang.vestige.service;
 
 
-import com.jikang.vestige.domain.PracticeRepository;
+import com.jikang.vestige.repository.PracticeRepository;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

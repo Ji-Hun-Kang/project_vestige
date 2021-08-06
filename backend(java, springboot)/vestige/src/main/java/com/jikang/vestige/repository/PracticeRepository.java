@@ -1,5 +1,6 @@
-package com.jikang.vestige.domain;
+package com.jikang.vestige.repository;
 
+import com.jikang.vestige.model.Practice;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // @Repository를 적어야 스프링 IoC에 빈으로 등록이 된다.

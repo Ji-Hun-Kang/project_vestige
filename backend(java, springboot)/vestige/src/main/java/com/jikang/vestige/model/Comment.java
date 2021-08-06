@@ -1,42 +1,37 @@
-package com.jikang.vestige.domain;
+package com.jikang.vestige.model;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-public class Board {
-
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int number;
 
-    @Column(nullable = false, length = 100)
-    private String title;
+    @Column(nullable = false, length = 200)
+    private String content;
 
-    @Lob // 대용량 데이터
-    private String content; // 섬머노트 라이브러리 <html> 태그가 섞여서 디자인이됨.
+    @ManyToOne
+    @JoinColumn(name="postNumber")
+    private Post post;
 
-    @ColumnDefault("0")
-    private int count; // 조회수
-
-    @ManyToOne // Many = Board, One = User
+    @ManyToOne
     @JoinColumn(name="userNumber")
-    private User user; // DB는 오브젝트를 저장할 수 없다. 자바는 오브젝트를 저장할 수 있다.
+    private User user;
 
     @CreationTimestamp
     private Timestamp createDate;
 
-    public Board() {
+    public Comment() {
     }
 
-    public Board(int number, String title, String content, int count, User user, Timestamp createDate) {
+    public Comment(int number, String content, Post post, User user, Timestamp createDate) {
         this.number = number;
-        this.title = title;
         this.content = content;
-        this.count = count;
+        this.post = post;
         this.user = user;
         this.createDate = createDate;
     }
@@ -49,14 +44,6 @@ public class Board {
         this.number = number;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
     }
@@ -65,12 +52,12 @@ public class Board {
         this.content = content;
     }
 
-    public int getCount() {
-        return count;
+    public Post getPost() {
+        return post;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public User getUser() {

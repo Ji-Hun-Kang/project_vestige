@@ -1,4 +1,4 @@
-package com.jikang.vestige.domain;
+package com.jikang.vestige.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

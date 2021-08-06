@@ -2,12 +2,12 @@ package com.jikang.vestige.service;
 
 import java.util.List;
 
-import com.jikang.vestige.domain.Practice;
+import com.jikang.vestige.model.Practice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jikang.vestige.domain.PracticeRepository;
+import com.jikang.vestige.repository.PracticeRepository;
 
 @Service // 기능을 정의할 수 있고, 트랜잭션을 관리할 수 있다.
 public class PracticeService {

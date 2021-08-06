@@ -1,7 +1,7 @@
 package com.jikang.vestige.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jikang.vestige.domain.Practice;
+import com.jikang.vestige.model.Practice;
 import com.jikang.vestige.service.PracticeService;
 
 import org.hamcrest.Matchers;
@@ -31,6 +31,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @WebMvcTest
 public class PracticeControllerUnitTest {
 
+    Logger logger = LoggerFactory.getLogger(PracticeControllerUnitTest.class);
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -48,13 +50,21 @@ public class PracticeControllerUnitTest {
         System.out.println("test:"+test);*/
 
        //given (테스트를 하기 위한 준비)
-        Practice practice = new Practice(null, "스프링 따라하기", "코스");
+       Practice practice = new Practice(null, "스프링 따라하기", "코스");
        // ObjectMapper().writeValueAsString(object) : object를 json으로 변경하는 함수
        // ObjectMapper().readValue(json) : json을 object로 변경하는 함수
        String content = new ObjectMapper().writeValueAsString(practice);
        //logger.info(content);
-       //when(practiceService.저장하기(practice)).thenReturn(new Practice(1L, "스프링 따라하기", "jikang"));
        when(practiceService.저장하기(practice)).thenReturn(new Practice(1L, "스프링 따라하기", "jikang"));
+
+        /*try{
+
+            when(practiceService.저장하기(practice)).thenReturn(new Practice(1L, "스프링 따라하기", "jikang"));
+
+
+        }catch(Exception exception){
+            logger.error(exception.getMessage());
+        }*/
 
        // when(테스트 실행)
        ResultActions resultAction = mockMvc.perform(post("/practice")

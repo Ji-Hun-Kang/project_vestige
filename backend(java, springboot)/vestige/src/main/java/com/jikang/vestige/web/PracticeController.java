@@ -1,6 +1,6 @@
 package com.jikang.vestige.web;
 
-import com.jikang.vestige.domain.Practice;
+import com.jikang.vestige.model.Practice;
 import com.jikang.vestige.service.PracticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

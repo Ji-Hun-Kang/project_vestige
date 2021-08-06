@@ -1,8 +1,8 @@
 package com.jikang.vestige.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jikang.vestige.domain.Practice;
-import com.jikang.vestige.domain.PracticeRepository;
+import com.jikang.vestige.model.Practice;
+import com.jikang.vestige.repository.PracticeRepository;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -79,7 +79,7 @@ public class PracticeControllerIntegreTest {
 
         /*logger.info("save_테스트() 시작 ============================");
         // 가짜 BookService를 사용하므로 실제로 저장하기 작업을 수행하지 않는다.
-        com.jikang.vestige.domain.Book book = PracticeService.저장하기(new Book(null, "제목", "코스"));
+        com.jikang.vestige.model.Book book = PracticeService.저장하기(new Book(null, "제목", "코스"));
         System.out.println("book:"+book);*/
 
         //given (테스트를 하기 위한 준비)
