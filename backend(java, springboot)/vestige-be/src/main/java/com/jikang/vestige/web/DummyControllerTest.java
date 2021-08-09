@@ -4,6 +4,7 @@ import com.jikang.vestige.model.RoleType;
 import com.jikang.vestige.model.User;
 import com.jikang.vestige.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,8 +23,22 @@ public class DummyControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+    // save 함수는 id를 전달하지 않으면 insert를 해주고
+    // save 함수는 id를 전달하면 해당 id에 대한 데이터가 있으면 update를 해주고
+    // save 함수는 id를 전달하면 해당 id에 대한 데이터가 없으면 insert를 한다.
+
+    @DeleteMapping("/dummy/user/{number}")
+    public String delete(@PathVariable int number){
+        try {
+            userRepository.deleteById(number);
+        } catch (EmptyResultDataAccessException e){
+            return "삭제에 실패하였습니다. 해당 number는 DB에 없습니다.";
+        }
+        return "삭제되었습니다." + number;
+    }
+
     // json 데이터를 요청 => java Object(MessageConverter의 Jackson라이브러리가 변환해서 받는다)
-    @Transactional
+    @Transactional // 함수 종료시에 자동 commit이 된다.
     @PutMapping("/dummy/user/{number}")
     public User updateUser(@PathVariable int number, @RequestBody User requestUser){
         System.out.println("number: " + number);
@@ -37,7 +52,7 @@ public class DummyControllerTest {
         user.setEmail(requestUser.getEmail());
         // userRepository.save(user);
         // 더티 체킹
-        return null;
+        return user;
     }
 
     // http://localhost:8000/vestige/dummy/user/{number}
@@ -72,7 +87,7 @@ public class DummyControllerTest {
         User user = userRepository.findById(number).orElseThrow(new Supplier<IllegalArgumentException>() {
             @Override
             public IllegalArgumentException get() {
-                return new IllegalArgumentException("해당 사용자가 없습니다. number: "+number);
+                return new IllegalArgumentException("해당 사용자가 없습니다.");
             }
         });
 

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 // 특정 어노테이션이 붙어있는 클래스 파일들을 new해서 스프링 컨테이너에 관리한다.(IoC)
 @RestController
 public class PracticeController {
-	
+
 	private final PracticeService practiceService;
-	
+
 	@Autowired
 	public PracticeController(PracticeService practiceService) {
 		this.practiceService = practiceService;

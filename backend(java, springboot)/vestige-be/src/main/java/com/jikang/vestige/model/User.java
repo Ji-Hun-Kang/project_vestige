@@ -16,7 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에 연결된 DB의 넘버링 전략을 따라간다.
     private int number; // 유저번호(시퀀스 or auto increment)
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 30, unique = true)
     private String id; // 유저 아이디
 
     @Column(nullable = false, length = 100) // 비밀번호 암호화를 위해 길이를 넉넉하게 한다.
